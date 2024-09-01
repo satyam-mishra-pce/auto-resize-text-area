@@ -1,6 +1,6 @@
 {
   "name": "react-auto-resize-textarea",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component that auto-resizes based on its content.",
   "main": "dists/index.js",
   "types": "dists/index.d.ts",
