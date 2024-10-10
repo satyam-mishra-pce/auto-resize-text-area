@@ -56,19 +56,25 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     useEffect(() => {
       resizeTextArea();
-      const textarea = innerRef.current;
-      if (textarea && autoResize) {
-        textarea.addEventListener("input", resizeTextArea);
-        return () => textarea.removeEventListener("input", resizeTextArea);
-      }
-    }, [resizeTextArea, autoResize]);
+    }, [resizeTextArea]);
 
     useEffect(() => {
       if (!autoResize) return;
       onHeightChange?.(contentBasedHeight);
     }, [contentBasedHeight]);
 
-    return <textarea ref={setRef} {...props} />;
+    return (
+      <textarea
+        ref={setRef}
+        {...props}
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+          if (autoResize) {
+            resizeTextArea();
+          }
+          props.onChange?.(event);
+        }}
+      />
+    );
   }
 );
 
